@@ -46,10 +46,14 @@ contract Marriage{
         tmp_marriage.aceite[msg.sender] = true;
     }
 
-    function oficializar(uint256 marriageId) private{
+    function oficializar(uint256 marriageId) public{
         require(msg.sender == owner, "Only the owner can call this function");
         require(marriages[marriageId].oficializado == false, "Marriage already officialized");
         require(marriages[marriageId].divorciado_anulado == false, "Marriage already ended, nothing to officialize");
         marriages[marriageId].oficializado = true;
+    }
+
+    function is_it_official(uint256 marriageId) public view{
+        return marriages[marriageId].oficializado;
     }
 }
